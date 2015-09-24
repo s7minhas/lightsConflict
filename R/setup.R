@@ -17,11 +17,17 @@ loadPkg=function(toLoad){
 }
 
 toLoad=c(
-	'ggplot2', 'reshape2', 'RColorBrewer',
-	'magrittr',
-	'rgdal', 'raster', 'rasterVis', 'maptools', 'mapproj'
+	'ggplot2', 'reshape2', 'RColorBrewer', # shaping/plotting
+	'magrittr', # coding niceties
+	'rgdal', 'raster', 'rasterVis', 'maptools', 'mapproj', # spatial
+	'foreach', 'doParallel' # parallelization
 	)
 loadPkg(toLoad)
 
 # Set a theme for gg
 theme_set(theme_bw())
+
+# Helpful functions
+replaceVal = function(obj, value, newValue){ obj[obj==value] <- newValue; return(obj) }
+char = function(x){ as.character(x) }
+num = function(x){ as.numeric(char(x)) }

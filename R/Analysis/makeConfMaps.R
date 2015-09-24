@@ -4,18 +4,8 @@ if(Sys.info()['user']=='janus829' | Sys.info()['user']=='s7m'){
 ####################	
 
 #################### Data for plotting
-# Get africa shapefile
-africa = readOGR(path.expand(paste0(dPath,'Data/AfricanCountries')), layer='AfricanCountires')
-
-# Create fortified version of africa shapefile
-if( !file.exists( paste0(dPath,'Data/AfricanCountries/africa.rda') ) ){
-	gpclibPermit()
-	cntries = africa@data$COUNTRY %>% unique() %>% data.frame(cntry=.)
-	cntries$code = 1:nrow(cntries)
-	africa@data$id = cntries$code[match(africa@data$COUNTRY, cntries$cntry)]
-	ggAfrica = fortify(africa, region='id')
-	save(ggAfrica, file=paste0(dPath,'Data/AfricanCountries/africa.rda'))
-	} else { load( paste0(dPath,'Data/AfricanCountries/africa.rda') ) }
+# Get fortified version of africa shapefile
+load( paste0(dPath,'Data/AfricanCountries/africa.rda') )
 
 # acled shape file
 map = readOGR(path.expand(paste0(dPath,'Data/acled_with_prio')), layer='acled_v3_with_PRIOGRID')
